@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arbeitsblatt: Harnsäurestoffwechsel</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; padding: 2rem 1rem; min-height: 100vh; }
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .ab-header { background: #fff; border: 0.5px solid #dddcd5; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .ab-tag { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: #888780; margin-bottom: 0.4rem; }
+  .ab-title { font-size: 22px; font-weight: 500; color: #1a1a18; margin-bottom: 0.75rem; }
+  .ab-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .ab-meta span { font-size: 13px; color: #5f5e5a; display: flex; align-items: center; gap: 5px; }
+  .ab-meta .icon { font-size: 15px; }
+
+  .progress-wrap { margin-bottom: 1.5rem; }
+  .progress-track { background: #e8e7e3; border-radius: 99px; height: 5px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 99px; background: #1D9E75; transition: width 0.4s ease; width: 0%; }
+  .progress-label { font-size: 12px; color: #888780; text-align: right; margin-top: 5px; }
+
+  .section-card { background: #fff; border: 0.5px solid #dddcd5; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .section-tag { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #888780; margin-bottom: 0.35rem; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
+  .badge-physio { background: #E6F1FB; color: #0C447C; }
+  .badge-patho  { background: #FAEEDA; color: #633806; }
+  .badge-klinik { background: #E1F5EE; color: #085041; }
+  .section-title { font-size: 15px; font-weight: 500; color: #1a1a18; border-bottom: 0.5px solid #dddcd5; padding-bottom: 0.75rem; margin-bottom: 0.9rem; }
+  .section-intro { font-size: 13px; color: #5f5e5a; margin-bottom: 1rem; line-height: 1.6; background: #f5f4f0; border-radius: 8px; padding: 8px 12px; }
+
+  .question { margin-bottom: 1.1rem; }
+  .q-text { font-size: 14px; color: #1a1a18; margin-bottom: 0.5rem; line-height: 1.6; }
+  .q-num { font-weight: 500; color: #5f5e5a; margin-right: 4px; }
+  .options { display: flex; flex-direction: column; gap: 6px; margin-left: 1.2rem; }
+  .option-btn { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 0.5px solid #dddcd5; border-radius: 8px; background: #f5f4f0; cursor: pointer; font-size: 13px; color: #1a1a18; text-align: left; transition: border-color 0.15s, background 0.15s; font-family: inherit; }
+  .option-btn:hover:not(:disabled) { border-color: #b4b2a9; background: #fff; }
+  .option-btn.correct { border-color: #1D9E75; background: #E1F5EE; color: #085041; font-weight: 500; }
+  .option-btn.wrong   { border-color: #E24B4A; background: #FCEBEB; color: #501313; }
+  .option-btn:disabled { cursor: default; }
+  .feedback { font-size: 13px; margin-top: 6px; margin-left: 1.2rem; padding: 8px 12px; border-radius: 8px; display: none; line-height: 1.5; }
+  .feedback.correct { background: #E1F5EE; color: #085041; border-left: 3px solid #1D9E75; }
+  .feedback.wrong   { background: #FCEBEB; color: #501313; border-left: 3px solid #E24B4A; }
+
+  .fill-blank { margin-left: 1.2rem; margin-top: 0.4rem; font-size: 13px; line-height: 2.4; color: #1a1a18; }
+  .fill-blank input { border: none; border-bottom: 1.5px solid #888780; background: transparent; width: 110px; font-size: 13px; padding: 2px 4px; color: #1a1a18; font-family: inherit; }
+  .fill-blank input:focus { outline: none; border-bottom-color: #1D9E75; }
+  .check-fill-btn { margin-top: 10px; margin-left: 1.2rem; padding: 7px 16px; border: 0.5px solid #b4b2a9; border-radius: 8px; background: transparent; cursor: pointer; font-size: 13px; color: #5f5e5a; font-family: inherit; }
+  .check-fill-btn:hover { background: #f5f4f0; }
+  .fill-result { font-size: 13px; margin-top: 8px; margin-left: 1.2rem; padding: 8px 12px; border-radius: 8px; display: none; line-height: 1.5; }
+
+  .open-area { margin-left: 1.2rem; margin-top: 0.4rem; }
+  .open-area textarea { width: 100%; border: 0.5px solid #b4b2a9; border-radius: 8px; padding: 8px 10px; font-size: 13px; font-family: inherit; color: #1a1a18; background: #f5f4f0; resize: vertical; min-height: 64px; }
+  .open-area textarea:focus { outline: none; border-color: #1D9E75; background: #fff; }
+  .open-reveal-btn { margin-top: 7px; padding: 6px 14px; border: 0.5px solid #b4b2a9; border-radius: 8px; background: transparent; cursor: pointer; font-size: 13px; color: #5f5e5a; font-family: inherit; }
+  .open-reveal-btn:hover { background: #f5f4f0; }
+  .model-answer { background: #f5f4f0; border-left: 3px solid #378ADD; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #5f5e5a; margin-top: 7px; display: none; line-height: 1.6; }
+
+  .score-box { background: #fff; border: 0.5px solid #dddcd5; border-radius: 12px; padding: 1.5rem; text-align: center; margin-top: 1.25rem; display: none; }
+  .score-num { font-size: 36px; font-weight: 500; color: #1a1a18; }
+  .score-label { font-size: 14px; color: #5f5e5a; margin-top: 6px; }
+
+  @media (max-width: 480px) {
+    body { padding: 1rem 0.75rem; }
+    .ab-meta { gap: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="ab-header">
+    <div class="ab-tag">LF 4.2 · Harnpflichtige Stoffe</div>
+    <div class="ab-title">Harnsäurestoffwechsel</div>
+    <div class="ab-meta">
+      <span><span class="icon">⏱</span> 45 Minuten</span>
+      <span><span class="icon">✅</span> 12 Aufgaben</span>
+      <span><span class="icon">📖</span> Selbststudium</span>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+    <div class="progress-label" id="prog-label">0 von 8 Multiple-Choice-Fragen beantwortet</div>
+  </div>
+
+  <!-- ABSCHNITT 1 -->
+  <div class="section-card">
+    <div class="section-tag">Abschnitt 1 <span class="badge badge-physio">Physiologie</span></div>
+    <div class="section-title">Grundlagen des Harnsäurestoffwechsels</div>
+    <div class="section-intro">Lies zunächst Abschnitt 1 (Seite 1) im Skript. Beantworte dann die folgenden Fragen.</div>
+
+    <div class="question" id="q1">
+      <div class="q-text"><span class="q-num">1.</span> Was ist Harnsäure und wie entsteht sie im Körper?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q1',0,1)">a) Ein Hormon, das in der Leber produziert wird</button>
+        <button class="option-btn" onclick="checkMC('q1',1,1)">b) Das Endprodukt des Purinstoffwechsels</button>
+        <button class="option-btn" onclick="checkMC('q1',2,1)">c) Ein Abbauprodukt von Proteinen durch die Niere</button>
+        <button class="option-btn" onclick="checkMC('q1',3,1)">d) Ein Bestandteil der Zellmembran</button>
+      </div>
+      <div class="feedback correct" id="q1-ok">Richtig! Harnsäure ist das Endprodukt des Purinstoffwechsels. Purine stammen aus der Nahrung und aus körpereigener Synthese.</div>
+      <div class="feedback wrong"   id="q1-no">Nicht ganz. Harnsäure entsteht beim Abbau von Purinen – sie ist das Endprodukt des Purinstoffwechsels (Seite 1, Definition).</div>
+    </div>
+
+    <div class="question" id="q2">
+      <div class="q-text"><span class="q-num">2.</span> Über welche Organe wird Harnsäure hauptsächlich ausgeschieden?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q2',0,2)">a) Leber und Milz</button>
+        <button class="option-btn" onclick="checkMC('q2',1,2)">b) Nieren (2/3) und Darm (1/3)</button>
+        <button class="option-btn" onclick="checkMC('q2',2,2)">c) Ausschließlich über die Nieren</button>
+        <button class="option-btn" onclick="checkMC('q2',3,2)">d) Haut und Lunge</button>
+      </div>
+      <div class="feedback correct" id="q2-ok">Korrekt! 2/3 der Harnsäure werden über die Nieren, 1/3 über den Darm ausgeschieden (Abb. 2.4 im Skript).</div>
+      <div class="feedback wrong"   id="q2-no">Schau nochmal auf Abb. 2.4 (Seite 1). Die Exkretion erfolgt zu 2/3 über die Nieren und zu 1/3 über den Darm.</div>
+    </div>
+
+    <div class="question" id="q3">
+      <div class="q-text"><span class="q-num">3.</span> Lückentext: Ergänze die fehlenden Begriffe.</div>
+      <div class="fill-blank">
+        Harnsäure entsteht beim Abbau von <input type="text" id="fill1" placeholder="?">
+        über die Zwischenstufe <input type="text" id="fill2" placeholder="?">
+        und wird hauptsächlich über die <input type="text" id="fill3" placeholder="?"> ausgeschieden.
+      </div>
+      <button class="check-fill-btn" onclick="checkFill()">Überprüfen</button>
+      <div class="fill-result" id="fill-result"></div>
+    </div>
+  </div>
+
+  <!-- ABSCHNITT 2 -->
+  <div class="section-card">
+    <div class="section-tag">Abschnitt 2 <span class="badge badge-patho">Pathologie</span></div>
+    <div class="section-title">Pathologie & Hyperurikämie</div>
+    <div class="section-intro">Lies Abschnitt 2 (Seiten 2–3) im Skript, bevor du diese Aufgaben bearbeitest.</div>
+
+    <div class="question" id="q4">
+      <div class="q-text"><span class="q-num">4.</span> Ab welchem Wert gilt der Harnsäurespiegel bei Männern als erhöht?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q4',0,4)">a) über 210 µmol/l</button>
+        <button class="option-btn" onclick="checkMC('q4',1,4)">b) über 310 µmol/l</button>
+        <button class="option-btn" onclick="checkMC('q4',2,4)">c) über 420 µmol/l</button>
+        <button class="option-btn" onclick="checkMC('q4',3,4)">d) über 500 µmol/l</button>
+      </div>
+      <div class="feedback correct" id="q4-ok">Richtig! Der Referenzbereich für Männer liegt bei 210–420 µmol/l. Werte über 420 µmol/l gelten als Hyperurikämie.</div>
+      <div class="feedback wrong"   id="q4-no">Der Referenzbereich für Männer beträgt 210–420 µmol/l (Seite 2). Werte darüber gelten als erhöht.</div>
+    </div>
+
+    <div class="question" id="q5">
+      <div class="q-text"><span class="q-num">5.</span> Was unterscheidet die primäre von der sekundären Hyperurikämie?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q5',0,5)">a) Die primäre ist immer gefährlicher als die sekundäre</button>
+        <button class="option-btn" onclick="checkMC('q5',1,5)">b) Die primäre ist angeboren (Enzymdefekte), die sekundäre durch andere Erkrankungen/Medikamente verursacht</button>
+        <button class="option-btn" onclick="checkMC('q5',2,5)">c) Die sekundäre betrifft nur Kinder, die primäre nur Erwachsene</button>
+        <button class="option-btn" onclick="checkMC('q5',3,5)">d) Die primäre entsteht durch Ernährung, die sekundäre durch genetische Defekte</button>
+      </div>
+      <div class="feedback correct" id="q5-ok">Sehr gut! Primäre Hyperurikämie = angeborene Störung (Enzymdefekte). Sekundäre = Folge von Erkrankungen wie Leukämie, Niereninsuffizienz oder Medikamenten.</div>
+      <div class="feedback wrong"   id="q5-no">Schau nochmal auf Seite 2–3: Primär = angeboren (z. B. Lesch-Nyhan-Syndrom), sekundär = erworben durch Erkrankungen oder Medikamente.</div>
+    </div>
+
+    <div class="question" id="q6">
+      <div class="q-text"><span class="q-num">6.</span> Welcher Enzymdefekt führt beim Lesch-Nyhan-Syndrom zur Hyperurikämie?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q6',0,6)">a) Mangel an Amylase</button>
+        <button class="option-btn" onclick="checkMC('q6',1,6)">b) Gestörter Stoffwechsel von Adenin und Guanin (HGPRT-Defekt)</button>
+        <button class="option-btn" onclick="checkMC('q6',2,6)">c) Überproduktion von Insulin</button>
+        <button class="option-btn" onclick="checkMC('q6',3,6)">d) Mangel an Xanthinoxidase</button>
+      </div>
+      <div class="feedback correct" id="q6-ok">Korrekt! Beim Lesch-Nyhan-Syndrom ist der Stoffwechsel von Adenin und Guanin gestört (HGPRT-Defekt) → unkontrollierte Purinproduktion.</div>
+      <div class="feedback wrong"   id="q6-no">Das Lesch-Nyhan-Syndrom beruht auf einem Gendefekt, der den Stoffwechsel von Adenin und Guanin stört (Seite 2).</div>
+    </div>
+
+    <div class="question" id="q7">
+      <div class="q-text"><span class="q-num">7.</span> Welche der folgenden Ursachen kann eine sekundäre Hyperurikämie verursachen?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q7',0,7)">a) Hohe Flüssigkeitszufuhr</button>
+        <button class="option-btn" onclick="checkMC('q7',1,7)">b) Vegetarische Ernährung</button>
+        <button class="option-btn" onclick="checkMC('q7',2,7)">c) Tumorbehandlung mit Zytostatika</button>
+        <button class="option-btn" onclick="checkMC('q7',3,7)">d) Regelmäßiger Sport</button>
+      </div>
+      <div class="feedback correct" id="q7-ok">Richtig! Zytostatika führen zu vermehrtem Zellzerfall → mehr Purinfreisetzung → mehr Harnsäure. Das ist eine klassische sekundäre Hyperurikämie.</div>
+      <div class="feedback wrong"   id="q7-no">Zytostatika bei der Tumorbehandlung erhöhen den Zellzerfall und damit die Purinfreisetzung – typische Ursache der sekundären Hyperurikämie (Seite 3).</div>
+    </div>
+
+    <div class="question" id="q8">
+      <div class="q-text"><span class="q-num">8.</span> Wie häufig ist die primäre Hyperurikämie im Vergleich zur sekundären?</div>
+      <div class="options">
+        <button class="option-btn" onclick="checkMC('q8',0,8)">a) Primär: 50 %, Sekundär: 50 %</button>
+        <button class="option-btn" onclick="checkMC('q8',1,8)">b) Primär: 5 %, Sekundär: 95 %</button>
+        <button class="option-btn" onclick="checkMC('q8',2,8)">c) Primär: 95 %, Sekundär: 5 %</button>
+        <button class="option-btn" onclick="checkMC('q8',3,8)">d) Primär: 70 %, Sekundär: 30 %</button>
+      </div>
+      <div class="feedback correct" id="q8-ok">Sehr gut! Die primäre Hyperurikämie macht 95 % aller Fälle aus, die sekundäre nur 5 % (Zusammenfassung Seite 3).</div>
+      <div class="feedback wrong"   id="q8-no">Schau auf die Zusammenfassungsgrafik auf Seite 3: Primär = 95 %, Sekundär = 5 %.</div>
+    </div>
+  </div>
+
+  <!-- ABSCHNITT 3 -->
+  <div class="section-card">
+    <div class="section-tag">Abschnitt 3 <span class="badge badge-klinik">Klinik & Verständnis</span></div>
+    <div class="section-title">Vertiefende Verständnisfragen</div>
+    <div class="section-intro">Diese Fragen erfordern kein Nachschlagen – denke aus dem Gelesenen heraus und formuliere in eigenen Worten.</div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">9.</span> Erkläre in eigenen Worten: Warum führt eine erhöhte Harnsäurekonzentration zu Gicht?</div>
+      <div class="open-area">
+        <textarea placeholder="Deine Antwort hier..."></textarea>
+        <div><button class="open-reveal-btn" onclick="revealModel('model9')">Musterlösung anzeigen</button></div>
+        <div class="model-answer" id="model9">Bei einer Konzentration über 420 µmol/l ist Harnsäure im Blut nicht mehr vollständig löslich. Sie kristallisiert aus und lagert sich bevorzugt in kühlen, wenig durchbluteten Gelenken ab (klassisch: Großzehengrundgelenk). Diese Kristalle lösen eine massive Entzündungsreaktion aus – das ist ein Gichtanfall.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">10.</span> Nenne drei Erkrankungen oder Zustände, die die renale Harnsäureausscheidung vermindern können.</div>
+      <div class="open-area">
+        <textarea placeholder="1. &#10;2. &#10;3. "></textarea>
+        <div><button class="open-reveal-btn" onclick="revealModel('model10')">Musterlösung anzeigen</button></div>
+        <div class="model-answer" id="model10">Aus dem Skript (Seite 3): Alkoholismus, Nierenerkrankung, Ketoazidose, Einnahme von Diuretika. Jede dieser drei genügt als richtige Antwort.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">11.</span> Mit welchen anderen Erkrankungsbildern tritt eine Hyperurikämie häufig gemeinsam auf – und was verbindet diese?</div>
+      <div class="open-area">
+        <textarea placeholder="Deine Antwort hier..."></textarea>
+        <div><button class="open-reveal-btn" onclick="revealModel('model11')">Musterlösung anzeigen</button></div>
+        <div class="model-answer" id="model11">Erhöhte Harnsäurewerte treten häufig zusammen mit hohen Blutfettwerten, Bluthochdruck und Alkoholismus auf. Diese Erkrankungen werden im Skript als Merkmale der „Wohlstandsgesellschaft" bezeichnet – sie entstehen durch Überernährung, kalorienreiche Kost (viel Fleisch/Innereien) und erhöhten Alkoholkonsum.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-text"><span class="q-num">12.</span> Transferfrage: Ein Patient bekommt nach einer Chemotherapie einen schmerzhaften Gichtanfall. Erkläre den pathophysiologischen Zusammenhang.</div>
+      <div class="open-area">
+        <textarea placeholder="Deine Antwort hier..."></textarea>
+        <div><button class="open-reveal-btn" onclick="revealModel('model12')">Musterlösung anzeigen</button></div>
+        <div class="model-answer" id="model12">Zytostatika zerstören Tumorzellen massenhaft → viele Zellkerne werden abgebaut → große Mengen Purine werden freigesetzt → Harnsäureproduktion steigt stark an (sekundäre Hyperurikämie durch Überproduktion) → Harnsäure kristallisiert in den Gelenken aus → Gichtanfall. Dies ist ein bekanntes Risiko bei der Behandlung von Leukämien oder soliden Tumoren (Tumorlysesyndrom).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="score-box" id="score-box">
+    <div style="font-size: 13px; color: #5f5e5a; margin-bottom: 4px;">Dein Ergebnis (MC-Fragen)</div>
+    <div class="score-num" id="score-num">–</div>
+    <div class="score-label" id="score-label"></div>
+  </div>
+
+</div>
+
+<script>
+  var answered = {};
+  var correct = 0;
+  var total = 8;
+
+  function checkMC(qid, chosen, correctIdx) {
+    if (answered[qid]) return;
+    answered[qid] = true;
+    var q = document.getElementById(qid);
+    var btns = q.querySelectorAll('.option-btn');
+    btns.forEach(function(b, i) {
+      b.disabled = true;
+      if (i === correctIdx) b.classList.add('correct');
+      else if (i === chosen) b.classList.add('wrong');
+    });
+    if (chosen === correctIdx) {
+      correct++;
+      document.getElementById(qid + '-ok').style.display = 'block';
+    } else {
+      document.getElementById(qid + '-no').style.display = 'block';
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    var n = Object.keys(answered).length;
+    var pct = Math.round((n / total) * 100);
+    document.getElementById('prog').style.width = pct + '%';
+    document.getElementById('prog-label').textContent = n + ' von ' + total + ' Multiple-Choice-Fragen beantwortet';
+    if (n === total) {
+      var box = document.getElementById('score-box');
+      box.style.display = 'block';
+      document.getElementById('score-num').textContent = correct + ' / ' + total;
+      var pct2 = Math.round((correct / total) * 100);
+      var msg = pct2 >= 75 ? 'Sehr gut! Du hast die Grundlagen sicher verstanden.' :
+                pct2 >= 50 ? 'Solide – lies die markierten Abschnitte nochmals nach.' :
+                             'Schau dir das Skript nochmal genau an und wiederhole die Aufgaben.';
+      document.getElementById('score-label').textContent = msg;
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  function revealModel(id) {
+    var el = document.getElementById(id);
+    el.style.display = el.style.display === 'block' ? 'none' : 'block';
+  }
+
+  function checkFill() {
+    var v1 = document.getElementById('fill1').value.trim().toLowerCase();
+    var v2 = document.getElementById('fill2').value.trim().toLowerCase();
+    var v3 = document.getElementById('fill3').value.trim().toLowerCase();
+    var ok1 = v1.indexOf('purin') !== -1;
+    var ok2 = v2.indexOf('xanth') !== -1;
+    var ok3 = v3.indexOf('nier') !== -1;
+    var res = document.getElementById('fill-result');
+    res.style.display = 'block';
+    if (ok1 && ok2 && ok3) {
+      res.style.background = '#E1F5EE';
+      res.style.borderLeft = '3px solid #1D9E75';
+      res.style.color = '#085041';
+      res.textContent = 'Alles richtig! Purine → Xanthin → Harnsäure → Ausscheidung über die Nieren.';
+    } else {
+      res.style.background = '#FAEEDA';
+      res.style.borderLeft = '3px solid #EF9F27';
+      res.style.color = '#633806';
+      var hint = 'Noch nicht ganz: ';
+      if (!ok1) hint += '1. Lücke = Purine. ';
+      if (!ok2) hint += '2. Lücke = Xanthin. ';
+      if (!ok3) hint += '3. Lücke = Niere(n). ';
+      res.textContent = hint;
+    }
+  }
+</script>
+</body>
+</html>
